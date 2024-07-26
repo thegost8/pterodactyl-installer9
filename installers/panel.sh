@@ -228,9 +228,8 @@ enable_services() {
     ;;
   esac
   systemctl enable nginx
-  systemctl enable mariadb
-  systemctl start mariadb
-}
+  systemctl enable mysql
+  systemctl start mysql
 
 selinux_allow() {
   setsebool -P httpd_can_network_connect 1 || true # these commands can fail OK
@@ -292,7 +291,6 @@ dep_install() {
 
     # Install dependencies
     install_packages "php8.1 php8.1-{cli,common,gd,mysql,mbstring,bcmath,xml,fpm,curl,zip} \
-      mariadb-common mariadb-server mariadb-client \
       nginx \
       redis-server \
       zip unzip tar \
@@ -306,7 +304,6 @@ dep_install() {
 
     # Install dependencies
     install_packages "php php-{common,fpm,cli,json,mysqlnd,mcrypt,gd,mbstring,pdo,zip,bcmath,dom,opcache,posix} \
-      mariadb mariadb-server \
       nginx \
       redis \
       zip unzip tar \
